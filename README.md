@@ -2,7 +2,7 @@
    <img src="./assets/kerasrl2g.png" width="535" height="201" />
    <br>
    <a>
-      <img src="https://img.shields.io/badge/python-3.7+-blue.svg" alt="Gitter">
+      <img src="https://img.shields.io/badge/python-3.6+-blue.svg" alt="Gitter">
    </a>
    <a>
       <img src="https://camo.githubusercontent.com/7ce7d8e78ad8ddab3bea83bb9b98128528bae110/68747470733a2f2f616c65656e34322e6769746875622e696f2f6261646765732f7372632f74656e736f72666c6f772e737667" alt="Gitter">
