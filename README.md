@@ -10,8 +10,11 @@
    <a href="https://opensource.org/licenses/MIT">
       <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="Gitter">
    </a>
+   <a href="https://opensource.org/licenses/MIT">
+      <img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fwau%2Fkeras-rl2.svg?type=shield" alt="Gitter">
+   </a>
    <a href="http://keras-rl2.readthedocs.io/">
-      <img src="https://readthedocs.org/projects/keras-rl/badge/" alt="Gitter">
+      <img src="https://readthedocs.org/projects/keras-rl2/badge/?version=latest" alt="Gitter">
    </a> 
    <a href="https://discord.gg/FfRgSU">
       <img src="https://img.shields.io/discord/308323056592486420.svg?logo=slack" alt="Gitter">
@@ -27,7 +30,7 @@
   </tr>
 </table>
 
-### NOTE: Use the latest commit from the master branch of https://github.com/tensorflow/tensorflow. The lastest release does not include needed fixes.
+### NOTE: Requires tf-nightly-2.0-preview. NOT tensorflow==2.0.0-alpha0.
 
 
 ## What is it?
