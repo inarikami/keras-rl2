@@ -12,7 +12,8 @@
    </a>
    <a href="http://keras-rl2.readthedocs.io/">
       <img src="https://readthedocs.org/projects/keras-rl/badge/" alt="Gitter">
-   </a> 
+   </a> <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fwau%2Fkeras-rl2?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwau%2Fkeras-rl2.svg?type=shield"/></a>
+
    <a href="https://discord.gg/FfRgSU">
       <img src="https://img.shields.io/discord/308323056592486420.svg?logo=slack" alt="Gitter">
    </a>
@@ -26,6 +27,9 @@
     <td><img src="/assets/pendulum.gif?raw=true" width="200"></td>
   </tr>
 </table>
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwau%2Fkeras-rl2.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwau%2Fkeras-rl2?ref=badge_large)
 
 ### NOTE: Use the latest commit from the master branch of https://github.com/tensorflow/tensorflow. The lastest release does not include needed fixes.
 
