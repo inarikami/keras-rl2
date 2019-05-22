@@ -16,7 +16,7 @@
    <a href="http://keras-rl2.readthedocs.io/">
       <img src="https://readthedocs.org/projects/keras-rl2/badge/?version=latest" alt="Gitter">
    </a> 
-   <a href="https://discord.gg/FfRgSU">
+   <a href="https://discord.gg/WApky6R">
       <img src="https://img.shields.io/discord/308323056592486420.svg?logo=slack" alt="Gitter">
    </a>
    <h3 align="center">Deep Reinforcement Learning for Tensorflow 2 Keras</h3></p>
