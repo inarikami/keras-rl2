@@ -8,10 +8,10 @@ from tempfile import mkdtemp
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras import __version__ as KERAS_VERSION
+from tensorflow.python.keras.callbacks import Callback as KerasCallback, CallbackList as KerasCallbackList
 from tensorflow.python.keras.utils.generic_utils import Progbar
-from tensorflow.python.keras.callbacks import CallbackList
 
-class Callback(tf.keras.callbacks.Callback):
+class Callback(KerasCallback):
     def _set_env(self, env):
         self.env = env
 
@@ -40,7 +40,7 @@ class Callback(tf.keras.callbacks.Callback):
         pass
 
 
-class CallbackList(CallbackList):
+class CallbackList(KerasCallbackList):
     def _set_env(self, env):
         """ Set environment for each callback in callbackList """
         for callback in self.callbacks:
@@ -100,7 +100,7 @@ class CallbackList(CallbackList):
                 callback.on_action_end(action, logs=logs)
 
 
-class TestLogger(tf.keras.callbacks.Callback):
+class TestLogger(Callback):
     """ Logger Class for Test """
     def on_train_begin(self, logs):
         """ Print logs at beginning of training"""
@@ -117,7 +117,7 @@ class TestLogger(tf.keras.callbacks.Callback):
         print(template.format(*variables))
 
 
-class TrainEpisodeLogger(tf.keras.callbacks.Callback):
+class TrainEpisodeLogger(Callback):
     def __init__(self):
         # Some algorithms compute multiple episodes at once since they are multi-threaded.
         # We therefore use a dictionary that is indexed by the episode to separate episodes
@@ -208,7 +208,7 @@ class TrainEpisodeLogger(tf.keras.callbacks.Callback):
         self.step += 1
 
 
-class TrainIntervalLogger(tf.keras.callbacks.Callback):
+class TrainIntervalLogger(Callback):
     def __init__(self, interval=10000):
         self.interval = interval
         self.step = 0
@@ -279,7 +279,7 @@ class TrainIntervalLogger(tf.keras.callbacks.Callback):
         self.episode_rewards.append(logs['episode_reward'])
 
 
-class FileLogger(tf.keras.callbacks.Callback):
+class FileLogger(Callback):
     def __init__(self, filepath, interval=None):
         self.filepath = filepath
         self.interval = interval
@@ -356,13 +356,13 @@ class FileLogger(tf.keras.callbacks.Callback):
             json.dump(sorted_data, f)
 
 
-class Visualizer(tf.keras.callbacks.Callback):
+class Visualizer(Callback):
     def on_action_end(self, action, logs):
         """ Render environment at the end of each action """
         self.env.render(mode='human')
 
 
-class ModelIntervalCheckpoint(tf.keras.callbacks.Callback):
+class ModelIntervalCheckpoint(Callback):
     def __init__(self, filepath, interval, verbose=0):
         super(ModelIntervalCheckpoint, self).__init__()
         self.filepath = filepath
