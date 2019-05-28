@@ -6,3 +6,4 @@ examples/.ipynb_checkpoints/intro-to-rl-checkpoint.ipynb
 *.data-00000-of-00001
 examples/intro-to-rl.ipynb
 examples/checkpoint
+*.ipynb
