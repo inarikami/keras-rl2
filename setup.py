@@ -9,7 +9,7 @@ setup(name='keras-rl2',
       author_email='taylor.mcnally@emory.edu',
       url='https://github.com/wau/keras-rl2',
       license='MIT',
-      install_requires=['tf-nightly-2.0-preview'],
+      install_requires=['tensorflow==2.0.0-beta0'],
       extras_require={
           'gym': ['gym'],
       },

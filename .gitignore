@@ -7,3 +7,4 @@ examples/.ipynb_checkpoints/intro-to-rl-checkpoint.ipynb
 examples/intro-to-rl.ipynb
 examples/checkpoint
 *.ipynb
+*.pyc
