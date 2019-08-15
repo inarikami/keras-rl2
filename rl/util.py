@@ -3,6 +3,7 @@ import numpy as np
 from tensorflow.keras.models import model_from_config, Sequential, Model, model_from_config
 import tensorflow.keras.optimizers as optimizers
 import tensorflow.keras.backend as K
+import tensorflow as tf
 
 
 def clone_model(model, custom_objects={}):
@@ -18,6 +19,7 @@ def clone_model(model, custom_objects={}):
 
 def clone_optimizer(optimizer):
     if type(optimizer) is str:
+        print(optimizer)
         return optimizers.get(optimizer)
     # Requires Keras 1.0.7 since get_config has breaking changes.
     params = dict([(k, v) for k, v in optimizer.get_config().items()])
@@ -81,7 +83,7 @@ def huber_loss(y_true, y_pred, clip_value):
 
 class AdditionalUpdatesOptimizer(optimizers.Optimizer):
     def __init__(self, optimizer, additional_updates):
-        super().__init__(optimizer)
+        super().__init__(optimizer._name)
         self.optimizer = optimizer
         self.additional_updates = additional_updates
 

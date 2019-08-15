@@ -81,6 +81,7 @@ class DDPGAgent(Agent):
 
     def compile(self, optimizer, metrics=[]):
         metrics += [mean_q]
+        print(optimizer._name)
 
         if type(optimizer) in (list, tuple):
             if len(optimizer) != 2:
@@ -135,14 +136,14 @@ class DDPGAgent(Agent):
         combined_inputs[self.critic_action_input_idx] = self.actor(state_inputs)
 
         combined_output = self.critic(combined_inputs)
-
-        updates = actor_optimizer.get_updates(
-            params=self.actor.trainable_weights, loss=-K.mean(combined_output))
+        self.loss = -K.mean(combined_output)
+        with self.loss.graph.as_default():
+            updates = actor_optimizer.get_updates(
+                params=self.actor.trainable_weights, loss=self.loss)
         if self.target_model_update < 1.:
             # Include soft target model updates.
             updates += get_soft_target_model_updates(self.target_actor, self.actor, self.target_model_update)
         updates += self.actor.updates  # include other updates of the actor, e.g. for BN
-
         # Finally, combine it all into a callable function.
         self.actor_train_fn = K.function(state_inputs + [K.learning_phase()],
                                              [self.actor(state_inputs)], updates=updates)
