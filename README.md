@@ -30,7 +30,7 @@
   </tr>
 </table>
 
-### NOTE: Requires tf-nightly-2.0-preview. NOT tensorflow==2.0.0-alpha0.
+### NOTE: Requires tensorflow==2.0.0-b1.
 
 
 ## What is it?
