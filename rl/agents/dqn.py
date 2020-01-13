@@ -104,8 +104,6 @@ class DQNAgent(AbstractDQNAgent):
         super(DQNAgent, self).__init__(*args, **kwargs)
 
         # Validate (important) input.
-        if hasattr(model.output, '__len__') and len(model.output) > 1:
-            raise ValueError('Model "{}" has more than one output. DQN expects a model that has a single output.'.format(model))
         if list(model.output.shape) != list((None, self.nb_actions)):
             raise ValueError('Model output "{}" has invalid shape. DQN expects a model that has one dimension for each action, in this case {}.'.format(model.output, self.nb_actions))
 
