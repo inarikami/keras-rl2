@@ -30,7 +30,7 @@
   </tr>
 </table>
 
-### NOTE: Requires tensorflow==2.0.0
+### NOTE: Requires tensorflow==2.0.1
 
 
 ## What is it?
