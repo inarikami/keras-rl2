@@ -70,7 +70,7 @@ pip install keras-rl2
 - Install from Github source:
 
 ```
-git clone https://github.com/keras-rl2/keras-rl2.git
+git clone https://github.com/wau/keras-rl2.git
 cd keras-rl
 python setup.py install
 ```
