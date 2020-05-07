@@ -2,7 +2,7 @@
    <img src="./assets/kerasrl2g.png" width="535" height="201" />
    <br>
    <a>
-      <img src="https://img.shields.io/badge/python-3.6+-blue.svg" alt="Gitter">
+      <img src="https://img.shields.io/badge/python-3.7+-blue.svg" alt="Gitter">
    </a>
    <a>
       <img src="https://camo.githubusercontent.com/7ce7d8e78ad8ddab3bea83bb9b98128528bae110/68747470733a2f2f616c65656e34322e6769746875622e696f2f6261646765732f7372632f74656e736f72666c6f772e737667" alt="Gitter">
@@ -16,9 +16,6 @@
    <a href="http://keras-rl2.readthedocs.io/">
       <img src="https://readthedocs.org/projects/keras-rl2/badge/?version=latest" alt="Gitter">
    </a> 
-   <a href="https://discord.gg/WApky6R">
-      <img src="https://img.shields.io/discord/308323056592486420.svg?logo=slack" alt="Gitter">
-   </a>
    <h3 align="center">Deep Reinforcement Learning for Tensorflow 2 Keras</h3></p>
 
 
@@ -30,7 +27,7 @@
   </tr>
 </table>
 
-### NOTE: Requires tensorflow==2.0.1
+### NOTE: Requires tensorflow==2.1.0
 
 
 ## What is it?
@@ -72,7 +69,7 @@ pip install keras-rl2
 ```
 git clone https://github.com/wau/keras-rl2.git
 cd keras-rl
-python setup.py install
+python install .
 ```
 
 ## Examples
