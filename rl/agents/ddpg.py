@@ -6,6 +6,8 @@ import warnings
 import numpy as np
 import tensorflow.keras.backend as K
 import tensorflow.keras.optimizers as optimizers
+import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
 
 from rl.core import Agent
 from rl.random import OrnsteinUhlenbeckProcess
@@ -26,15 +28,6 @@ class DDPGAgent(Agent):
                  gamma=.99, batch_size=32, nb_steps_warmup_critic=1000, nb_steps_warmup_actor=1000,
                  train_interval=1, memory_interval=1, delta_range=None, delta_clip=np.inf,
                  random_process=None, custom_model_objects={}, target_model_update=.001, **kwargs):
-        if hasattr(actor.output, '__len__') and len(actor.output) > 1:
-            raise ValueError('Actor "{}" has more than one output. DDPG expects an actor that has a single output.'.format(actor))
-        if hasattr(critic.output, '__len__') and len(critic.output) > 1:
-            raise ValueError('Critic "{}" has more than one output. DDPG expects a critic that has a single output.'.format(critic))
-        if critic_action_input not in critic.input:
-            raise ValueError('Critic "{}" does not have designated action input "{}".'.format(critic, critic_action_input))
-        if not hasattr(critic.input, '__len__') or len(critic.input) < 2:
-            raise ValueError('Critic "{}" does not have enough inputs. The critic must have at exactly two inputs, one for the action and one for the observation.'.format(critic))
-
         super(DDPGAgent, self).__init__(**kwargs)
 
         # Soft vs hard target model updates.
@@ -74,10 +67,6 @@ class DDPGAgent(Agent):
         # State.
         self.compiled = False
         self.reset_states()
-
-    @property
-    def uses_learning_phase(self):
-        return self.actor.uses_learning_phase or self.critic.uses_learning_phase
 
     def compile(self, optimizer, metrics=[]):
         metrics += [mean_q]
@@ -302,8 +291,6 @@ class DDPGAgent(Agent):
                     inputs = state0_batch[:]
                 else:
                     inputs = [state0_batch]
-                if self.uses_learning_phase:
-                    inputs += [self.training]
                 action_values = self.actor_train_fn(inputs)[0]
                 assert action_values.shape == (self.batch_size, self.nb_actions)
 
