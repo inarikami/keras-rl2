@@ -70,7 +70,6 @@ class DDPGAgent(Agent):
 
     def compile(self, optimizer, metrics=[]):
         metrics += [mean_q]
-        print(optimizer._name)
 
         if type(optimizer) in (list, tuple):
             if len(optimizer) != 2:
