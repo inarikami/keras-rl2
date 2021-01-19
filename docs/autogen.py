@@ -111,7 +111,7 @@ def get_function_signature(function, method=True):
         args = args[:-len(defaults)]
     else:
         kwargs = []
-    st = '%s.%s(' % (function.__module__, function.__name__)
+    st = f'{function.__module__}.{function.__name__}('
     for a in args:
         st += str(a) + ', '
     for a, v in kwargs:

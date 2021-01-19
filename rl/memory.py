@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from collections import deque, namedtuple
 import warnings
 import random
@@ -43,7 +42,7 @@ def sample_batch_indexes(low, high, size):
     return batch_idxs
 
 
-class RingBuffer(object):
+class RingBuffer:
     def __init__(self, maxlen):
         self.maxlen = maxlen
         self.data = deque(maxlen=maxlen)
@@ -109,7 +108,7 @@ def zeroed_observation(observation):
         return 0.
 
 
-class Memory(object):
+class Memory:
     def __init__(self, window_length, ignore_episode_boundaries=False):
         self.window_length = window_length
         self.ignore_episode_boundaries = ignore_episode_boundaries
@@ -164,7 +163,7 @@ class Memory(object):
 
 class SequentialMemory(Memory):
     def __init__(self, limit, **kwargs):
-        super(SequentialMemory, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         
         self.limit = limit
 
@@ -254,7 +253,7 @@ class SequentialMemory(Memory):
             reward (float): Reward obtained by taking this action
             terminal (boolean): Is the state terminal
         """ 
-        super(SequentialMemory, self).append(observation, action, reward, terminal, training=training)
+        super().append(observation, action, reward, terminal, training=training)
         
         # This needs to be understood as follows: in `observation`, take `action`, obtain `reward`
         # and weather the next state is `terminal` or not.
@@ -279,14 +278,14 @@ class SequentialMemory(Memory):
         # Returns
             Dict of config
         """
-        config = super(SequentialMemory, self).get_config()
+        config = super().get_config()
         config['limit'] = self.limit
         return config
 
 
 class EpisodeParameterMemory(Memory):
     def __init__(self, limit, **kwargs):
-        super(EpisodeParameterMemory, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.limit = limit
 
         self.params = RingBuffer(limit)
@@ -322,7 +321,7 @@ class EpisodeParameterMemory(Memory):
             reward (float): Reward obtained by taking this action
             terminal (boolean): Is the state terminal
         """
-        super(EpisodeParameterMemory, self).append(observation, action, reward, terminal, training=training)
+        super().append(observation, action, reward, terminal, training=training)
         if training:
             self.intermediate_rewards.append(reward)
 

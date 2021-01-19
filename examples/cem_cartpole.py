@@ -55,7 +55,7 @@ cem.compile()
 cem.fit(env, nb_steps=100000, visualize=False, verbose=2)
 
 # After training is done, we save the best weights.
-cem.save_weights('cem_{}_params.h5f'.format(ENV_NAME), overwrite=True)
+cem.save_weights(f'cem_{ENV_NAME}_params.h5f', overwrite=True)
 
 # Finally, evaluate our algorithm for 5 episodes.
 cem.test(env, nb_episodes=5, visualize=True)

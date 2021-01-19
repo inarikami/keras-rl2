@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import warnings
 from copy import deepcopy
 
@@ -14,7 +13,7 @@ from rl.callbacks import (
 )
 
 
-class Agent(object):
+class Agent:
     """Abstract base class for all implemented agents.
 
     Each agent interacts with the environment (as defined by the `Env` class) by first observing the
@@ -84,7 +83,7 @@ class Agent(object):
         if not self.compiled:
             raise RuntimeError('Your tried to fit your agent but it hasn\'t been compiled yet. Please call `compile()` before `fit()`.')
         if action_repetition < 1:
-            raise ValueError('action_repetition must be >= 1, is {}'.format(action_repetition))
+            raise ValueError(f'action_repetition must be >= 1, is {action_repetition}')
 
         self.training = True
 
@@ -151,7 +150,7 @@ class Agent(object):
                             observation, reward, done, info = self.processor.process_step(observation, reward, done, info)
                         callbacks.on_action_end(action)
                         if done:
-                            warnings.warn('Env ended before {} random steps could be performed at the start. You should probably lower the `nb_max_start_steps` parameter.'.format(nb_random_start_steps))
+                            warnings.warn(f'Env ended before {nb_random_start_steps} random steps could be performed at the start. You should probably lower the `nb_max_start_steps` parameter.')
                             observation = deepcopy(env.reset())
                             if self.processor is not None:
                                 observation = self.processor.process_observation(observation)
@@ -270,7 +269,7 @@ class Agent(object):
         if not self.compiled:
             raise RuntimeError('Your tried to test your agent but it hasn\'t been compiled yet. Please call `compile()` before `test()`.')
         if action_repetition < 1:
-            raise ValueError('action_repetition must be >= 1, is {}'.format(action_repetition))
+            raise ValueError(f'action_repetition must be >= 1, is {action_repetition}')
 
         self.training = False
         self.step = 0
@@ -328,7 +327,7 @@ class Agent(object):
                     observation, r, done, info = self.processor.process_step(observation, r, done, info)
                 callbacks.on_action_end(action)
                 if done:
-                    warnings.warn('Env ended before {} random steps could be performed at the start. You should probably lower the `nb_max_start_steps` parameter.'.format(nb_random_start_steps))
+                    warnings.warn(f'Env ended before {nb_random_start_steps} random steps could be performed at the start. You should probably lower the `nb_max_start_steps` parameter.')
                     observation = deepcopy(env.reset())
                     if self.processor is not None:
                         observation = self.processor.process_observation(observation)
@@ -495,7 +494,7 @@ class Agent(object):
         pass
 
 
-class Processor(object):
+class Processor:
     """Abstract base class for implementing processors.
 
     A processor acts as a coupling mechanism between an `Agent` and its `Env`. This can
@@ -604,7 +603,7 @@ class Processor(object):
 # https://github.com/openai/gym/blob/master/gym/core.py
 
 
-class Env(object):
+class Env:
     """The abstract environment class that is used by all agents. This class has the exact
     same API that OpenAI Gym uses so that integrating with it is trivial. In contrast to the
     OpenAI Gym implementation, this class only defines the abstract methods without any actual
@@ -686,10 +685,10 @@ class Env(object):
         self.close()
 
     def __str__(self):
-        return '<{} instance>'.format(type(self).__name__)
+        return f'<{type(self).__name__} instance>'
 
 
-class Space(object):
+class Space:
     """Abstract model for a space that is used for the state and action spaces. This class has the
     exact same API that OpenAI Gym uses so that integrating with it is trivial.
 

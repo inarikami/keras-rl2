@@ -1,6 +1,6 @@
 # Inspired from VecEnv from OpenAI Baselines
 
-class VecEnv(object):
+class VecEnv:
     """
     An abstract asynchronous, vectorized environment.
     """
@@ -52,7 +52,7 @@ class VecEnv(object):
         return self.step_wait()
 
     def render(self, mode='human'):
-        logger.warn('Render not defined for %s' % self)
+        logger.warn(f'Render not defined for {self}')
 
     def seed(self, i):
         raise NotImplementedError()
@@ -64,7 +64,7 @@ class VecEnv(object):
         else:
             return self
 
-class CloudpickleWrapper(object):
+class CloudpickleWrapper:
     """
     Uses cloudpickle to serialize contents (otherwise multiprocessing tries to use pickle)
     """

@@ -1,6 +1,3 @@
-from __future__ import division
-from __future__ import absolute_import
-
 import pytest
 import numpy as np
 from numpy.testing import assert_allclose
@@ -59,7 +56,7 @@ def test_single_continuous_dqn_input():
     L_input = Input(shape=(2, 3))
     L_input_action = Input(shape=(nb_actions,))
     x = Concatenate()([Flatten()(L_input), L_input_action])
-    x = Dense(((nb_actions * nb_actions + nb_actions) // 2))(x)
+    x = Dense((nb_actions * nb_actions + nb_actions) // 2)(x)
     L_model = Model(inputs=[L_input_action, L_input], outputs=x)
 
     memory = SequentialMemory(limit=10, window_length=2)
@@ -91,7 +88,7 @@ def test_multi_continuous_dqn_input():
     L_input_action = Input(shape=(nb_actions,))
     x = Concatenate()([L_input1, L_input2])
     x = Concatenate()([Flatten()(x), L_input_action])
-    x = Dense(((nb_actions * nb_actions + nb_actions) // 2))(x)
+    x = Dense((nb_actions * nb_actions + nb_actions) // 2)(x)
     L_model = Model(inputs=[L_input_action, L_input1, L_input2], outputs=x)
 
     memory = SequentialMemory(limit=10, window_length=2)

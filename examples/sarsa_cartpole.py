@@ -41,7 +41,7 @@ sarsa.compile(Adam(lr=1e-3), metrics=['mae'])
 sarsa.fit(env, nb_steps=50000, visualize=False, verbose=2)
 
 # After training is done, we save the final weights.
-sarsa.save_weights('sarsa_{}_weights.h5f'.format(ENV_NAME), overwrite=True)
+sarsa.save_weights(f'sarsa_{ENV_NAME}_weights.h5f', overwrite=True)
 
 # Finally, evaluate our algorithm for 5 episodes.
 sarsa.test(env, nb_episodes=5, visualize=True)
