@@ -1,21 +1,23 @@
+from collections import deque
+
 import pytest
 import numpy as np
 from numpy.testing import assert_allclose
 
-from rl.memory import SequentialMemory, RingBuffer
+from rl.memory import SequentialMemory
 
 
 def test_ring_buffer():
-    def assert_elements(b, ref):
+    def assert_elements(b: deque, ref):
         assert len(b) == len(ref)
         for idx in range(b.maxlen):
             if idx >= len(ref):
-                with pytest.raises(KeyError):
+                with pytest.raises(IndexError):
                     b[idx]
             else:
                 assert b[idx] == ref[idx]
 
-    b = RingBuffer(5)
+    b = deque(maxlen=5)
 
     # Fill buffer.
     assert_elements(b, [])

@@ -27,10 +27,8 @@ def sample_batch_indexes(low, high, size):
         # batch. We cannot use `np.random.choice` here because it is horribly inefficient as
         # the memory grows. See https://github.com/numpy/numpy/issues/2764 for a discussion.
         # `random.sample` does the same thing (drawing without replacement) and is way faster.
-        try:
-            r = xrange(low, high)
-        except NameError:
-            r = range(low, high)
+
+        r = range(low, high)
         batch_idxs = random.sample(r, size)
     else:
         # Not enough data. Help ourselves with sampling from the range, but the same index
@@ -41,46 +39,6 @@ def sample_batch_indexes(low, high, size):
     assert len(batch_idxs) == size
     return batch_idxs
 
-
-class RingBuffer:
-    def __init__(self, maxlen):
-        self.maxlen = maxlen
-        self.data = deque(maxlen=maxlen)
-
-    def __len__(self):
-        return self.length()
-
-    def __getitem__(self, idx):
-        """Return element of buffer at specific index
-
-        # Argument
-            idx (int): Index wanted
-
-        # Returns
-            The element of buffer at given index
-        """
-        if idx < 0 or idx >= self.length():
-            raise KeyError()
-        return self.data[idx]
-
-    def append(self, v):
-        """Append an element to the buffer
-
-        # Argument
-            v (object): Element to append
-        """
-        self.data.append(v)
-
-    def length(self):
-        """Return the length of Deque
-
-        # Argument
-            None
-
-        # Returns
-            The lenght of deque element
-        """
-        return len(self.data)
 
 def zeroed_observation(observation):
     """Return an array of zeros with same shape as given observation
@@ -169,10 +127,10 @@ class SequentialMemory(Memory):
 
         # Do not use deque to implement the memory. This data structure may seem convenient but
         # it is way too slow on random access. Instead, we use our own ring buffer implementation.
-        self.actions = RingBuffer(limit)
-        self.rewards = RingBuffer(limit)
-        self.terminals = RingBuffer(limit)
-        self.observations = RingBuffer(limit)
+        self.actions = deque(maxlen=limit)
+        self.rewards = deque(maxlen=limit)
+        self.terminals = deque(maxlen=limit)
+        self.observations = deque(maxlen=limit)
 
     def sample(self, batch_size, batch_idxs=None):
         """Return a randomized batch of experiences
@@ -288,9 +246,9 @@ class EpisodeParameterMemory(Memory):
         super().__init__(**kwargs)
         self.limit = limit
 
-        self.params = RingBuffer(limit)
+        self.params = deque(maxlen=limit)
         self.intermediate_rewards = []
-        self.total_rewards = RingBuffer(limit)
+        self.total_rewards = deque(maxlen=limit)
 
     def sample(self, batch_size, batch_idxs=None):
         """Return a randomized batch of params and rewards
