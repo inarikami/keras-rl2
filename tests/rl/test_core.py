@@ -1,4 +1,3 @@
-from __future__ import division
 import pytest
 import numpy as np
 from numpy.testing import assert_allclose
@@ -9,7 +8,7 @@ from rl.core import Agent, Env, Processor
 
 class TestEnv(Env):
     def __init__(self):
-        super(TestEnv, self).__init__()
+        super().__init__()
 
     def step(self, action):
         self.state += 1
@@ -30,7 +29,7 @@ class TestEnv(Env):
 
 class TestAgent(Agent):
     def __init__(self, memory, **kwargs):
-        super(TestAgent, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.memory = memory
 
     def forward(self, observation):
@@ -105,7 +104,7 @@ def test_copy_observations():
 
         class LocalEnv(Env):
             def __init__(self):
-                super(LocalEnv, self).__init__()
+                super().__init__()
 
             def step(self, action):
                 self.state += 1

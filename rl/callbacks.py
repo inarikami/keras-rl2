@@ -1,5 +1,3 @@
-from __future__ import division
-from __future__ import print_function
 import warnings
 import timeit
 import json
@@ -104,7 +102,7 @@ class TestLogger(Callback):
     """ Logger Class for Test """
     def on_train_begin(self, logs):
         """ Print logs at beginning of training"""
-        print('Testing for {} episodes ...'.format(self.params['nb_episodes']))
+        print(f"Testing for {self.params['nb_episodes']} episodes ...")
 
     def on_episode_end(self, episode, logs):
         """ Print logs at end of each episode """
@@ -133,12 +131,12 @@ class TrainEpisodeLogger(Callback):
         """ Print training values at beginning of training """
         self.train_start = timeit.default_timer()
         self.metrics_names = self.model.metrics_names
-        print('Training for {} steps ...'.format(self.params['nb_steps']))
+        print(f"Training for {self.params['nb_steps']} steps ...")
         
     def on_train_end(self, logs):
         """ Print training time at end of training """
         duration = timeit.default_timer() - self.train_start
-        print('done, took {:.3f} seconds'.format(duration))
+        print(f'done, took {duration:.3f} seconds')
 
     def on_episode_begin(self, episode, logs):
         """ Reset environment variables at beginning of each episode """
@@ -227,12 +225,12 @@ class TrainIntervalLogger(Callback):
         """ Initialize training statistics at beginning of training """
         self.train_start = timeit.default_timer()
         self.metrics_names = self.model.metrics_names
-        print('Training for {} steps ...'.format(self.params['nb_steps']))
+        print(f"Training for {self.params['nb_steps']} steps ...")
 
     def on_train_end(self, logs):
         """ Print training duration at end of training """
         duration = timeit.default_timer() - self.train_start
-        print('done, took {:.3f} seconds'.format(duration))
+        print(f'done, took {duration:.3f} seconds')
 
     def on_step_begin(self, step, logs):
         """ Print metrics if interval is over """
@@ -245,7 +243,7 @@ class TrainIntervalLogger(Callback):
                     means = np.nanmean(self.metrics, axis=0)
                     assert means.shape == (len(self.metrics_names),)
                     for name, mean in zip(self.metrics_names, means):
-                        formatted_metrics += ' - {}: {:.3f}'.format(name, mean)
+                        formatted_metrics += f' - {name}: {mean:.3f}'
                 
                 formatted_infos = ''
                 if len(self.infos) > 0:
@@ -254,11 +252,11 @@ class TrainIntervalLogger(Callback):
                         means = np.nanmean(self.infos, axis=0)
                         assert means.shape == (len(self.info_names),)
                         for name, mean in zip(self.info_names, means):
-                            formatted_infos += ' - {}: {:.3f}'.format(name, mean)
-                print('{} episodes - episode_reward: {:.3f} [{:.3f}, {:.3f}]{}{}'.format(len(self.episode_rewards), np.mean(self.episode_rewards), np.min(self.episode_rewards), np.max(self.episode_rewards), formatted_metrics, formatted_infos))
+                            formatted_infos += f' - {name}: {mean:.3f}'
+                print(f'{len(self.episode_rewards)} episodes - episode_reward: {np.mean(self.episode_rewards):.3f} [{np.min(self.episode_rewards):.3f}, {np.max(self.episode_rewards):.3f}]{formatted_metrics}{formatted_infos}')
                 print('')
             self.reset()
-            print('Interval {} ({} steps performed)'.format(self.step // self.interval + 1, self.step))
+            print(f'Interval {self.step // self.interval + 1} ({self.step} steps performed)')
 
     def on_step_end(self, step, logs):
         """ Update progression bar at the end of each step """
@@ -364,7 +362,7 @@ class Visualizer(Callback):
 
 class ModelIntervalCheckpoint(Callback):
     def __init__(self, filepath, interval, verbose=0):
-        super(ModelIntervalCheckpoint, self).__init__()
+        super().__init__()
         self.filepath = filepath
         self.interval = interval
         self.verbose = verbose
@@ -379,5 +377,5 @@ class ModelIntervalCheckpoint(Callback):
 
         filepath = self.filepath.format(step=self.total_steps, **logs)
         if self.verbose > 0:
-            print('Step {}: saving model to {}'.format(self.total_steps, filepath))
+            print(f'Step {self.total_steps}: saving model to {filepath}')
         self.model.save_weights(filepath, overwrite=True)

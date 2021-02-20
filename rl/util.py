@@ -22,7 +22,7 @@ def clone_optimizer(optimizer):
         print(optimizer)
         return optimizers.get(optimizer)
     # Requires Keras 1.0.7 since get_config has breaking changes.
-    params = dict([(k, v) for k, v in optimizer.get_config().items()])
+    params = {k: v for k, v in optimizer.get_config().items()}
     config = {
         'class_name': optimizer.__class__.__name__,
         'config': params,
@@ -98,7 +98,7 @@ class AdditionalUpdatesOptimizer(optimizers.Optimizer):
 
 
 # Based on https://github.com/openai/baselines/blob/master/baselines/common/mpi_running_mean_std.py
-class WhiteningNormalizer(object):
+class WhiteningNormalizer:
     def __init__(self, shape, eps=1e-2, dtype=np.float64):
         self.eps = eps
         self.shape = shape

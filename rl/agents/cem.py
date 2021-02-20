@@ -1,4 +1,3 @@
-from __future__ import division
 from collections import deque
 from copy import deepcopy
 
@@ -15,7 +14,7 @@ class CEMAgent(Agent):
     def __init__(self, model, nb_actions, memory, batch_size=50, nb_steps_warmup=1000,
                  train_interval=50, elite_frac=0.05, memory_interval=1, theta_init=None,
                  noise_decay_const=0.0, noise_ampl=0.0, **kwargs):
-        super(CEMAgent, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
         # Parameters.
         self.nb_actions = nb_actions
@@ -96,7 +95,7 @@ class CEMAgent(Agent):
     
     def update_theta(self,theta):
         if (theta is not None):
-            assert theta.shape == self.theta.shape, "Invalid theta, shape is {0} but should be {1}".format(theta.shape,self.theta.shape)
+            assert theta.shape == self.theta.shape, f"Invalid theta, shape is {theta.shape} but should be {self.theta.shape}"
             assert (not np.isnan(theta).any()), "Invalid theta, NaN encountered"
             assert (theta[self.num_weights:] >= 0.).all(), "Invalid theta, standard deviations must be nonnegative"            
             self.theta = theta

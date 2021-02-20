@@ -8,11 +8,11 @@ def visualize_log(filename, figsize=None, output=None):
     with open(filename, 'r') as f:
         data = json.load(f)
     if 'episode' not in data:
-        raise ValueError('Log file "{}" does not contain the "episode" key.'.format(filename))
+        raise ValueError(f'Log file "{filename}" does not contain the "episode" key.')
     episodes = data['episode']
 
     # Get value keys. The x axis is shared and is the number of episodes.
-    keys = sorted(list(set(data.keys()).difference(set(['episode']))))
+    keys = sorted(list(set(data.keys()).difference({'episode'})))
 
     if figsize is None:
         figsize = (15., 5. * len(keys))

@@ -23,7 +23,7 @@ ENV_NAME = 'HalfCheetah-v2'
 
 # Get the environment and extract the number of actions.
 env = gym.make(ENV_NAME)
-env = wrappers.Monitor(env, '/tmp/{}'.format(ENV_NAME), force=True)
+env = wrappers.Monitor(env, f'/tmp/{ENV_NAME}', force=True)
 np.random.seed(123)
 env.seed(123)
 assert len(env.action_space.shape) == 1
@@ -69,7 +69,7 @@ agent.compile([Adam(lr=1e-4), Adam(lr=1e-3)], metrics=['mae'])
 agent.fit(env, nb_steps=1000000, visualize=False, verbose=1)
 
 # After training is done, we save the final weights.
-agent.save_weights('ddpg_{}_weights.h5f'.format(ENV_NAME), overwrite=True)
+agent.save_weights(f'ddpg_{ENV_NAME}_weights.h5f', overwrite=True)
 
 # Finally, evaluate our algorithm for 5 episodes.
 agent.test(env, nb_episodes=5, visualize=True, nb_max_episode_steps=200)
