@@ -58,13 +58,6 @@ class VecEnv:
     def seed(self, i):
         raise NotImplementedError()
 
-    @property
-    def unwrapped(self):
-        if isinstance(self, VecEnvWrapper):
-            return self.venv.unwrapped
-        else:
-            return self
-
 class CloudpickleWrapper:
     """
     Uses cloudpickle to serialize contents (otherwise multiprocessing tries to use pickle)
