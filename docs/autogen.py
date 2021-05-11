@@ -10,9 +10,6 @@ import inspect
 import os
 import shutil
 import sys
-if sys.version[0] == '2':
-    reload(sys)
-    sys.setdefaultencoding('utf8')
 
 import rl
 import rl.core
