@@ -61,7 +61,7 @@ agent = DDPGAgent(nb_actions=nb_actions, actor=actor, critic=critic, critic_acti
                   memory=memory, nb_steps_warmup_critic=1000, nb_steps_warmup_actor=1000,
                   random_process=random_process, gamma=.99, target_model_update=1e-3,
                   processor=MujocoProcessor())
-agent.compile([Adam(lr=1e-4), Adam(lr=1e-3)], metrics=['mae'])
+agent.compile([Adam(learning_rate=1e-4), Adam(learning_rate=1e-3)], metrics=['mae'])
 
 # Okay, now it's time to learn something! We visualize the training here for show, but this
 # slows down training quite a lot. You can always safely abort the training prematurely using

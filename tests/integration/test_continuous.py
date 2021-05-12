@@ -45,7 +45,7 @@ def test_cdqn():
     agent = NAFAgent(nb_actions=nb_actions, V_model=V_model, L_model=L_model, mu_model=mu_model,
                      memory=memory, nb_steps_warmup=50, random_process=random_process,
                      gamma=.99, target_model_update=1e-3)
-    agent.compile(Adam(lr=1e-3))
+    agent.compile(Adam(learning_rate=1e-3))
 
     agent.fit(env, nb_steps=400, visualize=False, verbose=0, nb_max_episode_steps=100)
     h = agent.test(env, nb_episodes=2, visualize=False, nb_max_episode_steps=100)
@@ -82,7 +82,7 @@ def test_ddpg():
     agent = DDPGAgent(nb_actions=nb_actions, actor=actor, critic=critic, critic_action_input=action_input,
                       memory=memory, nb_steps_warmup_critic=50, nb_steps_warmup_actor=50,
                       random_process=random_process, gamma=.99, target_model_update=1e-3)
-    agent.compile([Adam(lr=1e-3), Adam(lr=1e-3)])
+    agent.compile([Adam(learning_rate=1e-3), Adam(learning_rate=1e-3)])
 
     agent.fit(env, nb_steps=400, visualize=False, verbose=0, nb_max_episode_steps=100)
     h = agent.test(env, nb_episodes=2, visualize=False, nb_max_episode_steps=100)
