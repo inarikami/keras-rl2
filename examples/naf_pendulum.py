@@ -74,7 +74,7 @@ random_process = OrnsteinUhlenbeckProcess(theta=.15, mu=0., sigma=.3, size=nb_ac
 agent = NAFAgent(nb_actions=nb_actions, V_model=V_model, L_model=L_model, mu_model=mu_model,
                  memory=memory, nb_steps_warmup=100, random_process=random_process,
                  gamma=.99, target_model_update=1e-3, processor=processor)
-agent.compile(Adam(lr=.001, clipnorm=1.), metrics=['mae'])
+agent.compile(Adam(learning_rate=.001, clipnorm=1.), metrics=['mae'])
 
 # Okay, now it's time to learn something! We visualize the training here for show, but this
 # slows down training quite a lot. You can always safely abort the training prematurely using

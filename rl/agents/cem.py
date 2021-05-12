@@ -84,7 +84,7 @@ class CEMAgent(Agent):
         self.recent_action = None
 
     def select_action(self, state, stochastic=False):
-        batch = np.array([state])
+        batch = np.array([state], dtype=object)
         if self.processor is not None:
             batch = self.processor.process_state_batch(batch)
 

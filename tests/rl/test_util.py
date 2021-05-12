@@ -44,11 +44,11 @@ def test_clone_graph_model():
 
 def test_clone_optimizer():
     lr, momentum, clipnorm, clipvalue = np.random.random(size=4)
-    optimizer = SGD(lr=lr, momentum=momentum, clipnorm=clipnorm, clipvalue=clipvalue)
+    optimizer = SGD(learning_rate=lr, momentum=momentum, clipnorm=clipnorm, clipvalue=clipvalue)
     clone = clone_optimizer(optimizer)
 
     assert isinstance(clone, SGD)
-    assert K.get_value(optimizer.lr) == K.get_value(clone.lr)
+    assert K.get_value(optimizer.learning_rate) == K.get_value(clone.learning_rate)
     assert K.get_value(optimizer.momentum) == K.get_value(clone.momentum)
     assert optimizer.clipnorm == clone.clipnorm
     assert optimizer.clipvalue == clone.clipvalue

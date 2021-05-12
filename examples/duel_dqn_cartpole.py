@@ -41,7 +41,7 @@ policy = BoltzmannQPolicy()
 # you can specify the dueling_type to one of {'avg','max','naive'}
 dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, nb_steps_warmup=10,
                enable_dueling_network=True, dueling_type='avg', target_model_update=1e-2, policy=policy)
-dqn.compile(Adam(lr=1e-3), metrics=['mae'])
+dqn.compile(Adam(learning_rate=1e-3), metrics=['mae'])
 
 # Okay, now it's time to learn something! We visualize the training here for show, but this
 # slows down training quite a lot. You can always safely abort the training prematurely using

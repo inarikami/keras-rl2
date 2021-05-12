@@ -1,4 +1,5 @@
 # Inspired from VecEnv from OpenAI Baselines
+import logging
 
 class VecEnv:
     """
@@ -52,17 +53,10 @@ class VecEnv:
         return self.step_wait()
 
     def render(self, mode='human'):
-        logger.warn(f'Render not defined for {self}')
+        logging.warning(f'Render not defined for {self}')
 
     def seed(self, i):
         raise NotImplementedError()
-
-    @property
-    def unwrapped(self):
-        if isinstance(self, VecEnvWrapper):
-            return self.venv.unwrapped
-        else:
-            return self
 
 class CloudpickleWrapper:
     """
