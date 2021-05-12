@@ -1,2 +1,2 @@
 gym
-tensorfow
+tensorfow>=2.4.1
