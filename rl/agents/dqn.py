@@ -53,7 +53,7 @@ class AbstractDQNAgent(Agent):
         self.compiled = False
 
     def process_state_batch(self, batch):
-        batch = np.array(batch)
+        batch = np.array(batch, dtype=object)
         if self.processor is None:
             return batch
         return self.processor.process_state_batch(batch)

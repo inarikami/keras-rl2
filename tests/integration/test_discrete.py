@@ -132,4 +132,4 @@ def test_sarsa():
     sarsa.fit(env, nb_steps=20000, visualize=False, verbose=0)
     policy.eps = 0.
     h = sarsa.test(env, nb_episodes=20, visualize=False)
-    assert_allclose(np.mean(h.history['episode_reward']), 3.)
+    assert_allclose(np.mean(h.history['episode_reward']), 3., atol=1.0)
