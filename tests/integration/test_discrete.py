@@ -109,7 +109,7 @@ def test_duel_dqn():
     dqn.fit(env, nb_steps=2000, visualize=False, verbose=0)
     policy.eps = 0.
     h = dqn.test(env, nb_episodes=20, visualize=False)
-    assert_allclose(np.mean(h.history['episode_reward']), 3.)
+    assert_allclose(np.mean(h.history['episode_reward']), 3., atol=1.0)
 
 
 def test_sarsa():
